@@ -5,11 +5,12 @@ const defaultGridSize = 16
 const defaultColor = 'black';
 var gridSize = defaultGridSize;
 
+const colorPicker = document.getElementById('colorPicker');
 const rainbowButton = document.getElementById('rainbowColor');
 const blackButton = document.getElementById('blackColor');
 const eraserButton = document.getElementById('eraser')
 
-var selectedColor = defaultColor;
+var colorMode = defaultColor;
 
 
 
@@ -17,16 +18,16 @@ eraseGrid = function(){
   grid.innerHTML ="";
 }
 
-rainbowButton.addEventListener('click', function(){
-  selectedColor = 'rainbow';
-})
+colorPicker.addEventListener('input', function(){
+  colorMode = 'input';
+});
 
-blackButton.addEventListener('click', function(){
-  selectedColor = 'black';
-})
+rainbowButton.addEventListener('click', function(){
+  colorMode = 'rainbow';
+});
 
 eraserButton.addEventListener('click', function(){
-  selectedColor = 'eraser';
+  colorMode = 'eraser';
 })
 
 document.getElementById('setGridSize').addEventListener('click', function(){
@@ -41,18 +42,23 @@ document.getElementById("clear").addEventListener('click', function(){
 
 changeColor = function(element){
   var color;
-  if (selectedColor == 'black'){
-    color = 'black'
-  }
-  if (selectedColor == 'eraser'){
+
+  if (colorMode == 'eraser'){
     color = 'white';
   }
-  if (selectedColor == 'rainbow'){
+  else if (colorMode == 'rainbow'){
     var red = Math.floor(Math.random()*255);
     var green =Math.floor(Math.random()*255);
     var blue = Math.floor(Math.random()*255);
-    var alpha = Math.random();
-    var color = `rgb(${red}, ${green}, ${blue}, ${alpha})`;
+
+    var color = `rgb(${red}, ${green}, ${blue})`;
+  }
+
+  else if (colorMode == 'input'){
+    color = colorPicker.value;
+  }
+  else {
+    color = 'black';
   }
   element.target.style.backgroundColor = color;
 }
