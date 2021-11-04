@@ -21,7 +21,7 @@ button{
 
 .container{
   margin: auto;
-  width: 850px;
+  width: 60vw;
   display: flex;
   justify-content: space-around;
   padding: 10px;
@@ -34,7 +34,6 @@ button{
   display:grid;
   height: 35vw;
   width: 35vw;
-  border: 1px solid black;
   margin: auto;
   background-color: white;
   padding: 0;
